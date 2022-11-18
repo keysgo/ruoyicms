@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.keystospider.mapper.KeystoSpiderConfigMapper">
+    
+    <resultMap type="KeystoSpiderConfig" id="KeystoSpiderConfigResult">
+        <result property="id"    column="id"    />
+        <result property="spiderCode"    column="spider_code"    />
+        <result property="spiderName"    column="spider_name"    />
+        <result property="entryUrls"    column="entry_urls"    />
+        <result property="targetRegex"    column="target_regex"    />
+        <result property="cascade"    column="cascade"    />
+        <result property="tableName"    column="table_name"    />
+        <result property="domain"    column="domain"    />
+        <result property="charset"    column="charset"    />
+        <result property="sleepTime"    column="sleep_time"    />
+        <result property="retryTimes"    column="retry_times"    />
+        <result property="threadCount"    column="thread_count"    />
+        <result property="useProxy"    column="use_proxy"    />
+        <result property="showLog"    column="show_log"    />
+        <result property="saveDb"    column="save_db"    />
+        <result property="isJson"    column="is_json"    />
+        <result property="spiderHighSetting"    column="spider_high_setting"    />
+        <result property="userDefinePipeline"    column="user_define_pipeline"    />
+        <result property="isSelenium"    column="is_selenium"    />
+        <result property="missionFinish"    column="mission_finish"    />
+        <result property="listExtractBy"    column="list_extract_by"    />
+    </resultMap>
+
+    <sql id="selectKeystoSpiderConfigVo">
+
+        select id, spider_code, spider_name, entry_urls, target_regex, `cascade`, `table_name`, `domain`, charset, sleep_time, retry_times, thread_count, use_proxy, show_log, save_db, is_json, spider_high_setting, user_define_pipeline, is_selenium, mission_finish, list_extract_by from keystospider_config
+    </sql>
+
+    <select id="selectKeystoSpiderConfigList" parameterType="KeystoSpiderConfig" resultMap="KeystoSpiderConfigResult">
+        <include refid="selectKeystoSpiderConfigVo"/>
+        <where>  
+            <if test="spiderCode != null  and spiderCode != ''"> and spider_code = #{spiderCode}</if>
+            <if test="spiderName != null  and spiderName != ''"> and spider_name like concat('%', #{spiderName}, '%')</if>
+            <if test="entryUrls != null  and entryUrls != ''"> and entry_urls = #{entryUrls}</if>
+            <if test="targetRegex != null  and targetRegex != ''"> and target_regex = #{targetRegex}</if>
+            <if test="cascade != null "> and cascade = #{cascade}</if>
+            <if test="tableName != null  and tableName != ''"> and table_name like concat('%', #{tableName}, '%')</if>
+            <if test="domain != null  and domain != ''"> and domain = #{domain}</if>
+            <if test="charset != null  and charset != ''"> and charset = #{charset}</if>
+            <if test="sleepTime != null "> and sleep_time = #{sleepTime}</if>
+            <if test="retryTimes != null "> and retry_times = #{retryTimes}</if>
+            <if test="threadCount != null "> and thread_count = #{threadCount}</if>
+            <if test="useProxy != null "> and use_proxy = #{useProxy}</if>
+            <if test="showLog != null "> and show_log = #{showLog}</if>
+            <if test="saveDb != null "> and save_db = #{saveDb}</if>
+            <if test="isJson != null "> and is_json = #{isJson}</if>
+            <if test="spiderHighSetting != null  and spiderHighSetting != ''"> and spider_high_setting = #{spiderHighSetting}</if>
+            <if test="userDefinePipeline != null  and userDefinePipeline != ''"> and user_define_pipeline = #{userDefinePipeline}</if>
+            <if test="isSelenium != null "> and is_selenium = #{isSelenium}</if>
+            <if test="missionFinish != null  and missionFinish != ''"> and mission_finish = #{missionFinish}</if>
+            <if test="listExtractBy != null  and listExtractBy != ''"> and list_extract_by = #{listExtractBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectKeystoSpiderConfigById" parameterType="Long" resultMap="KeystoSpiderConfigResult">
+        <include refid="selectKeystoSpiderConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKeystoSpiderConfig" parameterType="KeystoSpiderConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into keystospider_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="spiderCode != null">spider_code,</if>
+            <if test="spiderName != null">spider_name,</if>
+            <if test="entryUrls != null">entry_urls,</if>
+            <if test="targetRegex != null">target_regex,</if>
+            <if test="cascade != null">cascade,</if>
+            <if test="tableName != null">table_name,</if>
+            <if test="domain != null">domain,</if>
+            <if test="charset != null">charset,</if>
+            <if test="sleepTime != null">sleep_time,</if>
+            <if test="retryTimes != null">retry_times,</if>
+            <if test="threadCount != null">thread_count,</if>
+            <if test="useProxy != null">use_proxy,</if>
+            <if test="showLog != null">show_log,</if>
+            <if test="saveDb != null">save_db,</if>
+            <if test="isJson != null">is_json,</if>
+            <if test="spiderHighSetting != null">spider_high_setting,</if>
+            <if test="userDefinePipeline != null">user_define_pipeline,</if>
+            <if test="isSelenium != null">is_selenium,</if>
+            <if test="missionFinish != null">mission_finish,</if>
+            <if test="listExtractBy != null">list_extract_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="spiderCode != null">#{spiderCode},</if>
+            <if test="spiderName != null">#{spiderName},</if>
+            <if test="entryUrls != null">#{entryUrls},</if>
+            <if test="targetRegex != null">#{targetRegex},</if>
+            <if test="cascade != null">#{cascade},</if>
+            <if test="tableName != null">#{tableName},</if>
+            <if test="domain != null">#{domain},</if>
+            <if test="charset != null">#{charset},</if>
+            <if test="sleepTime != null">#{sleepTime},</if>
+            <if test="retryTimes != null">#{retryTimes},</if>
+            <if test="threadCount != null">#{threadCount},</if>
+            <if test="useProxy != null">#{useProxy},</if>
+            <if test="showLog != null">#{showLog},</if>
+            <if test="saveDb != null">#{saveDb},</if>
+            <if test="isJson != null">#{isJson},</if>
+            <if test="spiderHighSetting != null">#{spiderHighSetting},</if>
+            <if test="userDefinePipeline != null">#{userDefinePipeline},</if>
+            <if test="isSelenium != null">#{isSelenium},</if>
+            <if test="missionFinish != null">#{missionFinish},</if>
+            <if test="listExtractBy != null">#{listExtractBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKeystoSpiderConfig" parameterType="KeystoSpiderConfig">
+        update keystospider_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spiderCode != null">spider_code = #{spiderCode},</if>
+            <if test="spiderName != null">spider_name = #{spiderName},</if>
+            <if test="entryUrls != null">entry_urls = #{entryUrls},</if>
+            <if test="targetRegex != null">target_regex = #{targetRegex},</if>
+            <if test="cascade != null">cascade = #{cascade},</if>
+            <if test="tableName != null">table_name = #{tableName},</if>
+            <if test="domain != null">domain = #{domain},</if>
+            <if test="charset != null">charset = #{charset},</if>
+            <if test="sleepTime != null">sleep_time = #{sleepTime},</if>
+            <if test="retryTimes != null">retry_times = #{retryTimes},</if>
+            <if test="threadCount != null">thread_count = #{threadCount},</if>
+            <if test="useProxy != null">use_proxy = #{useProxy},</if>
+            <if test="showLog != null">show_log = #{showLog},</if>
+            <if test="saveDb != null">save_db = #{saveDb},</if>
+            <if test="isJson != null">is_json = #{isJson},</if>
+            <if test="spiderHighSetting != null">spider_high_setting = #{spiderHighSetting},</if>
+            <if test="userDefinePipeline != null">user_define_pipeline = #{userDefinePipeline},</if>
+            <if test="isSelenium != null">is_selenium = #{isSelenium},</if>
+            <if test="missionFinish != null">mission_finish = #{missionFinish},</if>
+            <if test="listExtractBy != null">list_extract_by = #{listExtractBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKeystoSpiderConfigById" parameterType="Long">
+        delete from keystospider_config where id = #{id}
+    </delete>
+
+    <delete id="deleteKeystoSpiderConfigByIds" parameterType="String">
+        delete from keystospider_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

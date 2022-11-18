@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增爬虫管理')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-field-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">爬虫配置ID：</label>
+                <div class="col-sm-8">
+                    <input name="configId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">字段：</label>
+                <div class="col-sm-8">
+                    <input name="field" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">字段名称：</label>
+                <div class="col-sm-8">
+                    <input name="fieldName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">提取类型：</label>
+                <div class="col-sm-8">
+                    <select name="extractType" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">提取规则2：</label>
+                <div class="col-sm-8">
+                    <input name="extractBy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">提取规则：</label>
+                <div class="col-sm-8">
+                    <input name="extractBy2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">常量值：</label>
+                <div class="col-sm-8">
+                    <textarea name="constantValue" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">元素的索引：</label>
+                <div class="col-sm-8">
+                    <input name="extractIndex" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">处理规则：</label>
+                <div class="col-sm-8">
+                    <input name="processRuleId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否是根据元素取值：</label>
+                <div class="col-sm-8">
+                    <input name="extractAttrFlag" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">根据哪个元素取值：</label>
+                <div class="col-sm-8">
+                    <input name="extractAttr" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">内置字段处理机制：</label>
+                <div class="col-sm-8">
+                    <input name="spiderFieldHighSetting" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">内置字段处理机制参数：</label>
+                <div class="col-sm-8">
+                    <input name="spiderFieldHighSettingParams" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "keystospider/field"
+        $("#form-field-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-field-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

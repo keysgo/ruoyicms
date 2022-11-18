@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增爬虫管理')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-spider-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">爬虫编码：</label>
+                <div class="col-sm-8">
+                    <input name="spiderCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">爬虫名称：</label>
+                <div class="col-sm-8">
+                    <input name="spiderName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">入口地址：</label>
+                <div class="col-sm-8">
+                    <textarea name="entryUrls" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">目标URL正则：</label>
+                <div class="col-sm-8">
+                    <input name="targetRegex" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">1:级联发现url  0:只从入口页面发现url：</label>
+                <div class="col-sm-8">
+                    <input name="cascade" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">存储的表名：</label>
+                <div class="col-sm-8">
+                    <input name="tableName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">网站根域名：</label>
+                <div class="col-sm-8">
+                    <input name="domain" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">字符集：</label>
+                <div class="col-sm-8">
+                    <input name="charset" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">睡眠时间(ms)：</label>
+                <div class="col-sm-8">
+                    <input name="sleepTime" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">重试次数：</label>
+                <div class="col-sm-8">
+                    <input name="retryTimes" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">线程数量：</label>
+                <div class="col-sm-8">
+                    <input name="threadCount" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">使用代理：</label>
+                <div class="col-sm-8">
+                    <input name="useProxy" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">打印日志：</label>
+                <div class="col-sm-8">
+                    <input name="showLog" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">保存到数据库：</label>
+                <div class="col-sm-8">
+                    <input name="saveDb" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否json接口请求：</label>
+                <div class="col-sm-8">
+                    <input name="isJson" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">爬虫高级设置：</label>
+                <div class="col-sm-8">
+                    <input name="spiderHighSetting" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">用户自定义pepeline：</label>
+                <div class="col-sm-8">
+                    <input name="userDefinePipeline" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">：</label>
+                <div class="col-sm-8">
+                    <input name="isSelenium" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">任务结束回调：</label>
+                <div class="col-sm-8">
+                    <input name="missionFinish" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">列表提取规则：</label>
+                <div class="col-sm-8">
+                    <input name="listExtractBy" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "keystospider/spider"
+        $("#form-spider-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-spider-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

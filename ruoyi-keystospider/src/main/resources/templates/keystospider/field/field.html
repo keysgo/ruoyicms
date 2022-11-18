@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('爬虫管理列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>爬虫配置ID：</label>
+                                <input type="text" name="configId"/>
+                            </li>
+                            <li>
+                                <label>字段：</label>
+                                <input type="text" name="field"/>
+                            </li>
+                            <li>
+                                <label>字段名称：</label>
+                                <input type="text" name="fieldName"/>
+                            </li>
+                            <li>
+                                <label>提取类型：</label>
+                                <select name="extractType">
+                                    <option value="">所有</option>
+                                    <option value="-1">代码生成请选择字典属性</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>提取规则2：</label>
+                                <input type="text" name="extractBy"/>
+                            </li>
+                            <li>
+                                <label>提取规则：</label>
+                                <input type="text" name="extractBy2"/>
+                            </li>
+                            <li>
+                                <label>元素的索引：</label>
+                                <input type="text" name="extractIndex"/>
+                            </li>
+                            <li>
+                                <label>处理规则：</label>
+                                <input type="text" name="processRuleId"/>
+                            </li>
+                            <li>
+                                <label>是否是根据元素取值：</label>
+                                <input type="text" name="extractAttrFlag"/>
+                            </li>
+                            <li>
+                                <label>根据哪个元素取值：</label>
+                                <input type="text" name="extractAttr"/>
+                            </li>
+                            <li>
+                                <label>内置字段处理机制：</label>
+                                <input type="text" name="spiderFieldHighSetting"/>
+                            </li>
+                            <li>
+                                <label>内置字段处理机制参数：</label>
+                                <input type="text" name="spiderFieldHighSettingParams"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="keystospider:field:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="keystospider:field:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="keystospider:field:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="keystospider:field:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table" style='table-layout:fixed;'></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('keystospider:field:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('keystospider:field:remove')}]];
+        var prefix = ctx + "keystospider/field";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "爬虫管理",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'fieldId',
+                    title: '字段ID',
+                    visible: false
+                },
+                {
+                    field: 'configId',
+                    title: '爬虫配置ID'
+                },
+                {
+                    field: 'field',
+                    title: '字段'
+                },
+                {
+                    field: 'fieldName',
+                    title: '字段名称'
+                },
+                {
+                    field: 'extractType',
+                    title: '提取类型'
+                },
+                {
+                    field: 'extractBy',
+                    title: '提取规则2'
+                },
+                {
+                    field: 'extractBy2',
+                    title: '提取规则'
+                },
+                {
+                    field: 'constantValue',
+                    title: '常量值'
+                },
+                {
+                    field: 'extractIndex',
+                    title: '元素的索引'
+                },
+                {
+                    field: 'processRuleId',
+                    title: '处理规则'
+                },
+                {
+                    field: 'extractAttrFlag',
+                    title: '是否是根据元素取值'
+                },
+                {
+                    field: 'extractAttr',
+                    title: '根据哪个元素取值'
+                },
+                {
+                    field: 'spiderFieldHighSetting',
+                    title: '内置字段处理机制'
+                },
+                {
+                    field: 'spiderFieldHighSettingParams',
+                    title: '内置字段处理机制参数'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.fieldId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.fieldId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

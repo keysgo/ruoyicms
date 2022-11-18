@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.keystospider.mapper.KeystoProductMapper">
+    
+    <resultMap type="KeystoProduct" id="KeystoProductResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="desc"    column="desc"    />
+        <result property="src"    column="src"    />
+        <result property="price"    column="price"    />
+        <result property="img"    column="img"    />
+        <result property="star"    column="star"    />
+        <result property="reviews"    column="reviews"    />
+        <result property="reviewsImg"    column="reviews_img"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectKeystoProductVo">
+        select id, title, `desc`, src, price, img, star, reviews, reviews_img, create_time, update_time from keysto_product
+    </sql>
+
+    <select id="selectKeystoProductList" parameterType="KeystoProduct" resultMap="KeystoProductResult">
+        <include refid="selectKeystoProductVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="desc != null  and desc != ''"> and `desc` = #{desc}</if>
+            <if test="src != null  and src != ''"> and src = #{src}</if>
+            <if test="price != null  and price != ''"> and price = #{price}</if>
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="star != null  and star != ''"> and star = #{star}</if>
+            <if test="reviews != null  and reviews != ''"> and reviews = #{reviews}</if>
+            <if test="reviewsImg != null  and reviewsImg != ''"> and reviews_img = #{reviewsImg}</if>
+        </where>
+    </select>
+    
+    <select id="selectKeystoProductById" parameterType="Long" resultMap="KeystoProductResult">
+        <include refid="selectKeystoProductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKeystoProduct" parameterType="KeystoProduct" useGeneratedKeys="true" keyProperty="id">
+        insert into keysto_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="desc != null">`desc`,</if>
+            <if test="src != null">src,</if>
+            <if test="price != null">price,</if>
+            <if test="img != null">img,</if>
+            <if test="star != null">star,</if>
+            <if test="reviews != null">reviews,</if>
+            <if test="reviewsImg != null">reviews_img,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="desc != null">#{desc},</if>
+            <if test="src != null">#{src},</if>
+            <if test="price != null">#{price},</if>
+            <if test="img != null">#{img},</if>
+            <if test="star != null">#{star},</if>
+            <if test="reviews != null">#{reviews},</if>
+            <if test="reviewsImg != null">#{reviewsImg},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKeystoProduct" parameterType="KeystoProduct">
+        update keysto_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="src != null">src = #{src},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="star != null">star = #{star},</if>
+            <if test="reviews != null">reviews = #{reviews},</if>
+            <if test="reviewsImg != null">reviews_img = #{reviewsImg},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKeystoProductById" parameterType="Long">
+        delete from keysto_product where id = #{id}
+    </delete>
+
+    <delete id="deleteKeystoProductByIds" parameterType="String">
+        delete from keysto_product where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

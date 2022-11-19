@@ -48,6 +48,10 @@ public class KeystoProcessor implements PageProcessor {
             System.out.println("提取产品详细信息");
             saveProductInfo(page);
             System.out.println("提取产品信息结束");
+            System.out.println("提取产品信息结束");
+            System.out.println("提取产品信息结束");
+            System.out.println("提取产品信息结束");
+            System.out.println("提取产品信息结束");
         }else {
             //提取产品连接加入任务
             for (Selectable selectable : list) {

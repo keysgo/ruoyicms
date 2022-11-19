@@ -32,6 +32,7 @@ public class KeystoPipeline implements Pipeline {
         if(keystoProduct!=null){
             try {
                 System.out.println("进入try");
+                System.out.println("进入try");
                 int i = this.keystoProductService.insertKeystoProduct(keystoProduct);
                 if(i>0){
                     System.out.println("成功写入数据库id:"+i);

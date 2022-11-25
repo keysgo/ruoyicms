@@ -45,7 +45,7 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
  * @author ruoyi
  */
 //@Configuration
-    @Slf4j
+@Slf4j
 public class ShiroConfig
 {
     /**

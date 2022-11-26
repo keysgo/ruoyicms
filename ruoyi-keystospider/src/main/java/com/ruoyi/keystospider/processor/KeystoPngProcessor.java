@@ -83,8 +83,7 @@ public class KeystoPngProcessor implements PageProcessor {
         String typeName = page.getHtml().xpath("/html/body/div[4]/div/div[3]/span/span[4]/a/span/text()").toString();
         List<Selectable> descList = page.getHtml().xpath("/html/body/div[4]/div//p").nodes();
         String desc="";
-        ///html/body/div[4]/div/div[6]  /html/body/div[4]/div/div[6]
-        List<Selectable> nodes = page.getHtml().xpath("/html/body/div[4]/div/div[6]").nodes();
+        String pngInfo = page.getHtml().xpath("/html/body/div[4]/div/div[5]").toString();
 
         for (Selectable s : descList) {
             desc+=s;
@@ -126,7 +125,7 @@ public class KeystoPngProcessor implements PageProcessor {
         KeystoPngProcessor keystoPngProcessor = new KeystoPngProcessor();
 //https://pngimg.com/
         Spider.create(keystoPngProcessor)
-                .addUrl("https://pngimg.com/image/54691")
+                .addUrl("https://pngimg.com/image/99599")
                 //开启5个线程抓取
                 .thread(1)
 //                .addPipeline()

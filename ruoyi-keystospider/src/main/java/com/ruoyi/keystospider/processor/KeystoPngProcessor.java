@@ -81,7 +81,16 @@ public class KeystoPngProcessor implements PageProcessor {
 
         String title = page.getHtml().xpath("/html/body/div[4]/div/h1/text()").toString();
         String typeName = page.getHtml().xpath("/html/body/div[4]/div/div[3]/span/span[4]/a/span/text()").toString();
-        String desc = page.getHtml().css("div.row p").toString();
+        List<Selectable> descList = page.getHtml().xpath("/html/body/div[4]/div//p").nodes();
+        String desc="";
+        ///html/body/div[4]/div/div[6]  /html/body/div[4]/div/div[6]
+        List<Selectable> nodes = page.getHtml().xpath("/html/body/div[4]/div/div[6]").nodes();
+
+        for (Selectable s : descList) {
+            desc+=s;
+        }
+
+        ///html/body/div[4]/div/p[1]
         log.info(title);
         log.info(desc);
         try {

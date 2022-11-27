@@ -6,9 +6,9 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * png管理对象 keysto_pngimg
+ * png图片对象 keysto_pngimg
  * 
- * @author keysto
+ * @author ruoyi
  * @date 2022-11-27
  */
 public class KeystoPngimg extends BaseEntity
@@ -26,13 +26,21 @@ public class KeystoPngimg extends BaseEntity
     @Excel(name = "关键字")
     private String keywords;
 
+    /** 名称 */
+    @Excel(name = "名称")
+    private String name;
+
     /** 描述 */
     @Excel(name = "描述")
     private String miaoshu;
 
+    /** 信息 */
+    @Excel(name = "信息")
+    private String info;
+
     /** 下载地址 */
     @Excel(name = "下载地址")
-    private String pngsrc;
+    private String src;
 
     /** 大小 */
     @Excel(name = "大小")
@@ -41,14 +49,6 @@ public class KeystoPngimg extends BaseEntity
     /** 分类 */
     @Excel(name = "分类")
     private String type;
-
-    /** png信息 */
-    @Excel(name = "png信息")
-    private String pnginfo;
-
-    /** png描述 */
-    @Excel(name = "png描述")
-    private String desc;
 
     public void setId(Long id) 
     {
@@ -77,6 +77,15 @@ public class KeystoPngimg extends BaseEntity
     {
         return keywords;
     }
+    public void setName(String name) 
+    {
+        this.name = name;
+    }
+
+    public String getName() 
+    {
+        return name;
+    }
     public void setMiaoshu(String miaoshu) 
     {
         this.miaoshu = miaoshu;
@@ -86,14 +95,23 @@ public class KeystoPngimg extends BaseEntity
     {
         return miaoshu;
     }
-    public void setPngsrc(String pngsrc) 
+    public void setInfo(String info) 
     {
-        this.pngsrc = pngsrc;
+        this.info = info;
     }
 
-    public String getPngsrc() 
+    public String getInfo() 
     {
-        return pngsrc;
+        return info;
+    }
+    public void setSrc(String src) 
+    {
+        this.src = src;
+    }
+
+    public String getSrc() 
+    {
+        return src;
     }
     public void setSize(String size) 
     {
@@ -113,24 +131,6 @@ public class KeystoPngimg extends BaseEntity
     {
         return type;
     }
-    public void setPnginfo(String pnginfo) 
-    {
-        this.pnginfo = pnginfo;
-    }
-
-    public String getPnginfo() 
-    {
-        return pnginfo;
-    }
-    public void setDesc(String desc) 
-    {
-        this.desc = desc;
-    }
-
-    public String getDesc() 
-    {
-        return desc;
-    }
 
     @Override
     public String toString() {
@@ -138,12 +138,12 @@ public class KeystoPngimg extends BaseEntity
             .append("id", getId())
             .append("title", getTitle())
             .append("keywords", getKeywords())
+            .append("name", getName())
             .append("miaoshu", getMiaoshu())
-            .append("pngsrc", getPngsrc())
+            .append("info", getInfo())
+            .append("src", getSrc())
             .append("size", getSize())
             .append("type", getType())
-            .append("pnginfo", getPnginfo())
-            .append("desc", getDesc())
             .toString();
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改png管理')" />
+    <th:block th:include="include :: header('修改png图片')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -19,16 +19,28 @@
                     <input name="keywords" th:field="*{keywords}" class="form-control" type="text">
                 </div>
             </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">名称：</label>
+                <div class="col-sm-8">
+                    <input name="name" th:field="*{name}" class="form-control" type="text">
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">描述：</label>
                 <div class="col-sm-8">
                     <textarea name="miaoshu" class="form-control">[[*{miaoshu}]]</textarea>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">信息：</label>
+                <div class="col-sm-8">
+                    <textarea name="info" class="form-control">[[*{info}]]</textarea>
+                </div>
+            </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">下载地址：</label>
                 <div class="col-sm-8">
-                    <input name="pngsrc" th:field="*{pngsrc}" class="form-control" type="text">
+                    <input name="src" th:field="*{src}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -46,23 +58,11 @@
                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">png信息：</label>
-                <div class="col-sm-8">
-                    <textarea name="pnginfo" class="form-control">[[*{pnginfo}]]</textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">png描述：</label>
-                <div class="col-sm-8">
-                    <textarea name="desc" class="form-control">[[*{desc}]]</textarea>
-                </div>
-            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var prefix = ctx + "KeystoSpider/pngimg";
+        var prefix = ctx + "keystospider/pngimg";
         $("#form-pngimg-edit").validate({
             focusCleanup: true
         });

@@ -20,21 +20,21 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * png管理Controller
+ * png图片Controller
  * 
- * @author keysto
+ * @author ruoyi
  * @date 2022-11-27
  */
 @Controller
-@RequestMapping("/KeystoSpider/pngimg")
+@RequestMapping("/keystospider/pngimg")
 public class KeystoPngimgController extends BaseController
 {
-    private String prefix = "KeystoSpider/pngimg";
+    private String prefix = "keystospider/pngimg";
 
     @Autowired
     private IKeystoPngimgService keystoPngimgService;
 
-    @RequiresPermissions("KeystoSpider:pngimg:view")
+    @RequiresPermissions("keystospider:pngimg:view")
     @GetMapping()
     public String pngimg()
     {
@@ -42,9 +42,9 @@ public class KeystoPngimgController extends BaseController
     }
 
     /**
-     * 查询png管理列表
+     * 查询png图片列表
      */
-    @RequiresPermissions("KeystoSpider:pngimg:list")
+    @RequiresPermissions("keystospider:pngimg:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(KeystoPngimg keystoPngimg)
@@ -55,21 +55,21 @@ public class KeystoPngimgController extends BaseController
     }
 
     /**
-     * 导出png管理列表
+     * 导出png图片列表
      */
-    @RequiresPermissions("KeystoSpider:pngimg:export")
-    @Log(title = "png管理", businessType = BusinessType.EXPORT)
+    @RequiresPermissions("keystospider:pngimg:export")
+    @Log(title = "png图片", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(KeystoPngimg keystoPngimg)
     {
         List<KeystoPngimg> list = keystoPngimgService.selectKeystoPngimgList(keystoPngimg);
         ExcelUtil<KeystoPngimg> util = new ExcelUtil<KeystoPngimg>(KeystoPngimg.class);
-        return util.exportExcel(list, "png管理数据");
+        return util.exportExcel(list, "png图片数据");
     }
 
     /**
-     * 新增png管理
+     * 新增png图片
      */
     @GetMapping("/add")
     public String add()
@@ -78,10 +78,10 @@ public class KeystoPngimgController extends BaseController
     }
 
     /**
-     * 新增保存png管理
+     * 新增保存png图片
      */
-    @RequiresPermissions("KeystoSpider:pngimg:add")
-    @Log(title = "png管理", businessType = BusinessType.INSERT)
+    @RequiresPermissions("keystospider:pngimg:add")
+    @Log(title = "png图片", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(KeystoPngimg keystoPngimg)
@@ -90,7 +90,7 @@ public class KeystoPngimgController extends BaseController
     }
 
     /**
-     * 修改png管理
+     * 修改png图片
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
@@ -101,10 +101,10 @@ public class KeystoPngimgController extends BaseController
     }
 
     /**
-     * 修改保存png管理
+     * 修改保存png图片
      */
-    @RequiresPermissions("KeystoSpider:pngimg:edit")
-    @Log(title = "png管理", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("keystospider:pngimg:edit")
+    @Log(title = "png图片", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(KeystoPngimg keystoPngimg)
@@ -113,10 +113,10 @@ public class KeystoPngimgController extends BaseController
     }
 
     /**
-     * 删除png管理
+     * 删除png图片
      */
-    @RequiresPermissions("KeystoSpider:pngimg:remove")
-    @Log(title = "png管理", businessType = BusinessType.DELETE)
+    @RequiresPermissions("keystospider:pngimg:remove")
+    @Log(title = "png图片", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

@@ -4,57 +4,57 @@ import java.util.List;
 import com.ruoyi.keystospider.domain.KeystoPngimg;
 
 /**
- * png管理Service接口
+ * png图片Service接口
  * 
- * @author keysto
+ * @author ruoyi
  * @date 2022-11-27
  */
 public interface IKeystoPngimgService 
 {
     /**
-     * 查询png管理
+     * 查询png图片
      * 
-     * @param id png管理主键
-     * @return png管理
+     * @param id png图片主键
+     * @return png图片
      */
     public KeystoPngimg selectKeystoPngimgById(Long id);
 
     /**
-     * 查询png管理列表
+     * 查询png图片列表
      * 
-     * @param keystoPngimg png管理
-     * @return png管理集合
+     * @param keystoPngimg png图片
+     * @return png图片集合
      */
     public List<KeystoPngimg> selectKeystoPngimgList(KeystoPngimg keystoPngimg);
 
     /**
-     * 新增png管理
+     * 新增png图片
      * 
-     * @param keystoPngimg png管理
+     * @param keystoPngimg png图片
      * @return 结果
      */
     public int insertKeystoPngimg(KeystoPngimg keystoPngimg);
 
     /**
-     * 修改png管理
+     * 修改png图片
      * 
-     * @param keystoPngimg png管理
+     * @param keystoPngimg png图片
      * @return 结果
      */
     public int updateKeystoPngimg(KeystoPngimg keystoPngimg);
 
     /**
-     * 批量删除png管理
+     * 批量删除png图片
      * 
-     * @param ids 需要删除的png管理主键集合
+     * @param ids 需要删除的png图片主键集合
      * @return 结果
      */
     public int deleteKeystoPngimgByIds(String ids);
 
     /**
-     * 删除png管理信息
+     * 删除png图片信息
      * 
-     * @param id png管理主键
+     * @param id png图片主键
      * @return 结果
      */
     public int deleteKeystoPngimgById(Long id);

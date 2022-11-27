@@ -9,9 +9,9 @@ import com.ruoyi.keystospider.service.IKeystoPngimgService;
 import com.ruoyi.common.core.text.Convert;
 
 /**
- * png管理Service业务层处理
+ * png图片Service业务层处理
  * 
- * @author keysto
+ * @author ruoyi
  * @date 2022-11-27
  */
 @Service
@@ -21,10 +21,10 @@ public class KeystoPngimgServiceImpl implements IKeystoPngimgService
     private KeystoPngimgMapper keystoPngimgMapper;
 
     /**
-     * 查询png管理
+     * 查询png图片
      * 
-     * @param id png管理主键
-     * @return png管理
+     * @param id png图片主键
+     * @return png图片
      */
     @Override
     public KeystoPngimg selectKeystoPngimgById(Long id)
@@ -33,10 +33,10 @@ public class KeystoPngimgServiceImpl implements IKeystoPngimgService
     }
 
     /**
-     * 查询png管理列表
+     * 查询png图片列表
      * 
-     * @param keystoPngimg png管理
-     * @return png管理
+     * @param keystoPngimg png图片
+     * @return png图片
      */
     @Override
     public List<KeystoPngimg> selectKeystoPngimgList(KeystoPngimg keystoPngimg)
@@ -45,9 +45,9 @@ public class KeystoPngimgServiceImpl implements IKeystoPngimgService
     }
 
     /**
-     * 新增png管理
+     * 新增png图片
      * 
-     * @param keystoPngimg png管理
+     * @param keystoPngimg png图片
      * @return 结果
      */
     @Override
@@ -57,9 +57,9 @@ public class KeystoPngimgServiceImpl implements IKeystoPngimgService
     }
 
     /**
-     * 修改png管理
+     * 修改png图片
      * 
-     * @param keystoPngimg png管理
+     * @param keystoPngimg png图片
      * @return 结果
      */
     @Override
@@ -69,9 +69,9 @@ public class KeystoPngimgServiceImpl implements IKeystoPngimgService
     }
 
     /**
-     * 批量删除png管理
+     * 批量删除png图片
      * 
-     * @param ids 需要删除的png管理主键
+     * @param ids 需要删除的png图片主键
      * @return 结果
      */
     @Override
@@ -81,9 +81,9 @@ public class KeystoPngimgServiceImpl implements IKeystoPngimgService
     }
 
     /**
-     * 删除png管理信息
+     * 删除png图片信息
      * 
-     * @param id png管理主键
+     * @param id png图片主键
      * @return 结果
      */
     @Override

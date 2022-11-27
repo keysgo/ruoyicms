@@ -3,6 +3,7 @@ package com.ruoyi.keystospider.processor;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.http.HttpUtil;
 import com.ruoyi.common.utils.http.HttpUtils;
+import com.ruoyi.keystospider.domain.KeystoPngimg;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import us.codecraft.webmagic.Page;
@@ -73,39 +74,33 @@ public class KeystoPngProcessor implements PageProcessor {
      * @param page
      */
     private void savePngInfo(Page page) {
+        KeystoPngimg keystoPngimg=new KeystoPngimg();
         String imgUrl = page.getHtml().css("div.png_big a").links().nodes().get(0).toString();
-        String href = page.getHtml().css("div.png_big a", "href").toString();
-        String[] split = StringUtils.split(href, "/");
-        //获取文件名字
-        String pngName = split[2];
-
-        String title = page.getHtml().xpath("/html/body/div[4]/div/h1/text()").toString();
-        String typeName = page.getHtml().xpath("/html/body/div[4]/div/div[3]/span/span[4]/a/span/text()").toString();
-        List<Selectable> descList = page.getHtml().xpath("/html/body/div[4]/div//p").nodes();
         String desc="";
-        String pngInfo = page.getHtml().xpath("/html/body/div[4]/div/div[5]").toString();
 
-        for (Selectable s : descList) {
-            desc+=s;
-        }
 
-        ///html/body/div[4]/div/p[1]
-        log.info(title);
-        log.info(desc);
-        try {
             long l = HttpUtil.downloadFile(imgUrl, FileUtil.file("E:\\java\\ruoyicms\\ruoyi-keystospider\\src\\main\\resources\\download\\png\\"));
             if(l>0){
                 //下载成功,存储信息
+                String href = page.getHtml().css("div.png_big a", "href").toString();
+                String[] split = StringUtils.split(href, "/");
+                //获取文件名字
+                String pngName = split[2];
+                keystoPngimg.setName(pngName);
+                String title = page.getHtml().xpath("/html/body/div[4]/div/h1/text()").toString();
+                keystoPngimg.setTitle(title);
+                String typeName = page.getHtml().xpath("/html/body/div[4]/div/div[3]/span/span[4]/a/span/text()").toString();
+                keystoPngimg.setType(typeName);
+                List<Selectable> descList = page.getHtml().xpath("/html/body/div[4]/div//p").nodes();
+                String pngInfo = page.getHtml().xpath("/html/body/div[4]/div/div[5]").toString();
+                keystoPngimg.setInfo(pngInfo);
+                for (Selectable s : descList) {
+                    desc+=s;
+                }
+                keystoPngimg.setMiaoshu(desc);
 
             }
-
-        }catch (RuntimeException e){
-            e.getMessage();
-        }
-
-
-
-
+            page.putField("keystoPngimg",keystoPngimg);
 
     }
 

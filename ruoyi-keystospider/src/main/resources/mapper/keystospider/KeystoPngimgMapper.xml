@@ -8,16 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="title"    column="title"    />
         <result property="keywords"    column="keywords"    />
+        <result property="name"    column="name"    />
         <result property="miaoshu"    column="miaoshu"    />
-        <result property="pngsrc"    column="pngsrc"    />
+        <result property="info"    column="info"    />
+        <result property="src"    column="src"    />
         <result property="size"    column="size"    />
         <result property="type"    column="type"    />
-        <result property="pnginfo"    column="pnginfo"    />
-        <result property="desc"    column="desc"    />
     </resultMap>
 
     <sql id="selectKeystoPngimgVo">
-        select id, title, keywords, miaoshu, pngsrc, size, type, pnginfo, desc from keysto_pngimg
+        select id, title, keywords, name, miaoshu, info, src, size, type from keysto_pngimg
     </sql>
 
     <select id="selectKeystoPngimgList" parameterType="KeystoPngimg" resultMap="KeystoPngimgResult">
@@ -25,12 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="keywords != null  and keywords != ''"> and keywords = #{keywords}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="miaoshu != null  and miaoshu != ''"> and miaoshu = #{miaoshu}</if>
-            <if test="pngsrc != null  and pngsrc != ''"> and pngsrc = #{pngsrc}</if>
+            <if test="info != null  and info != ''"> and info = #{info}</if>
+            <if test="src != null  and src != ''"> and src = #{src}</if>
             <if test="size != null  and size != ''"> and size = #{size}</if>
             <if test="type != null  and type != ''"> and type = #{type}</if>
-            <if test="pnginfo != null  and pnginfo != ''"> and pnginfo = #{pnginfo}</if>
-            <if test="desc != null  and desc != ''"> and desc = #{desc}</if>
         </where>
     </select>
     
@@ -44,22 +44,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title != null and title != ''">title,</if>
             <if test="keywords != null">keywords,</if>
+            <if test="name != null">name,</if>
             <if test="miaoshu != null">miaoshu,</if>
-            <if test="pngsrc != null">pngsrc,</if>
+            <if test="info != null">info,</if>
+            <if test="src != null">src,</if>
             <if test="size != null">size,</if>
             <if test="type != null">type,</if>
-            <if test="pnginfo != null">pnginfo,</if>
-            <if test="desc != null">desc,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="title != null and title != ''">#{title},</if>
             <if test="keywords != null">#{keywords},</if>
+            <if test="name != null">#{name},</if>
             <if test="miaoshu != null">#{miaoshu},</if>
-            <if test="pngsrc != null">#{pngsrc},</if>
+            <if test="info != null">#{info},</if>
+            <if test="src != null">#{src},</if>
             <if test="size != null">#{size},</if>
             <if test="type != null">#{type},</if>
-            <if test="pnginfo != null">#{pnginfo},</if>
-            <if test="desc != null">#{desc},</if>
          </trim>
     </insert>
 
@@ -68,12 +68,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null and title != ''">title = #{title},</if>
             <if test="keywords != null">keywords = #{keywords},</if>
+            <if test="name != null">name = #{name},</if>
             <if test="miaoshu != null">miaoshu = #{miaoshu},</if>
-            <if test="pngsrc != null">pngsrc = #{pngsrc},</if>
+            <if test="info != null">info = #{info},</if>
+            <if test="src != null">src = #{src},</if>
             <if test="size != null">size = #{size},</if>
             <if test="type != null">type = #{type},</if>
-            <if test="pnginfo != null">pnginfo = #{pnginfo},</if>
-            <if test="desc != null">desc = #{desc},</if>
         </trim>
         where id = #{id}
     </update>

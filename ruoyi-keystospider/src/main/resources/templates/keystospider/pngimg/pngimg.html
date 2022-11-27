@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('png管理列表')" />
+    <th:block th:include="include :: header('png图片列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -19,8 +19,12 @@
                                 <input type="text" name="keywords"/>
                             </li>
                             <li>
+                                <label>名称：</label>
+                                <input type="text" name="name"/>
+                            </li>
+                            <li>
                                 <label>下载地址：</label>
-                                <input type="text" name="pngsrc"/>
+                                <input type="text" name="src"/>
                             </li>
                             <li>
                                 <label>大小：</label>
@@ -43,16 +47,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="KeystoSpider:pngimg:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="keystospider:pngimg:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="KeystoSpider:pngimg:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="keystospider:pngimg:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="KeystoSpider:pngimg:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="keystospider:pngimg:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="KeystoSpider:pngimg:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="keystospider:pngimg:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -63,9 +67,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('KeystoSpider:pngimg:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('KeystoSpider:pngimg:remove')}]];
-        var prefix = ctx + "KeystoSpider/pngimg";
+        var editFlag = [[${@permission.hasPermi('keystospider:pngimg:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('keystospider:pngimg:remove')}]];
+        var prefix = ctx + "keystospider/pngimg";
 
         $(function() {
             var options = {
@@ -74,7 +78,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "png管理",
+                modalName: "png图片",
                 columns: [{
                     checkbox: true
                 },
@@ -92,11 +96,19 @@
                     title: '关键字'
                 },
                 {
+                    field: 'name',
+                    title: '名称'
+                },
+                {
                     field: 'miaoshu',
                     title: '描述'
                 },
                 {
-                    field: 'pngsrc',
+                    field: 'info',
+                    title: '信息'
+                },
+                {
+                    field: 'src',
                     title: '下载地址'
                 },
                 {
@@ -106,14 +118,6 @@
                 {
                     field: 'type',
                     title: '分类'
-                },
-                {
-                    field: 'pnginfo',
-                    title: 'png信息'
-                },
-                {
-                    field: 'desc',
-                    title: 'png描述'
                 },
                 {
                     title: '操作',

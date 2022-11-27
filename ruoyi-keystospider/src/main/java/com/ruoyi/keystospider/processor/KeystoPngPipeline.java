@@ -4,11 +4,13 @@ import com.ruoyi.keystospider.domain.KeystoPngimg;
 import com.ruoyi.keystospider.service.IKeystoPngimgService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 @Slf4j
+@Component
 public class KeystoPngPipeline implements Pipeline {
 
     @Autowired

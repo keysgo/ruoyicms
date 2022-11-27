@@ -1,6 +1,7 @@
 package com.ruoyi.keystospider.controller;
 
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.keystospider.processor.KeystoPngProcessor;
 import com.ruoyi.keystospider.processor.KeystoProcessor;
 import com.ruoyi.keystospider.service.IKeystoSpiderConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class SpiderController extends BaseController {
     private KeystoProcessor keystoProcessor;
 
     @Autowired
-    private IKeystoSpiderConfigService keystoSpiderConfigService;
+    private KeystoPngProcessor keystoPngProcessor;
 
     @GetMapping("/list")
     public String list(){
@@ -24,9 +25,11 @@ public class SpiderController extends BaseController {
         return "keystospider/spider/index";
     }
 
-    @GetMapping("/list3")
+    @GetMapping("/png")
     public String list1(){
-        keystoProcessor.run();
+        keystoPngProcessor.run();
         return "keystospider/spider/index";
     }
 }
+
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.home.mapper.KeystoPngimgMapper">
+    
+    <resultMap type="KeystoPngimg" id="KeystoPngimgResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="keywords"    column="keywords"    />
+        <result property="name"    column="name"    />
+        <result property="miaoshu"    column="miaoshu"    />
+        <result property="info"    column="info"    />
+        <result property="src"    column="src"    />
+        <result property="size"    column="size"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectKeystoPngimgVo">
+        select id, title, keywords, name, miaoshu, info, src, size, type from keysto_pngimg
+    </sql>
+
+    <select id="selectKeystoPngimgList" parameterType="KeystoPngimg" resultMap="KeystoPngimgResult">
+        <include refid="selectKeystoPngimgVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="keywords != null  and keywords != ''"> and keywords = #{keywords}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectKeystoPngimgById" parameterType="Long" resultMap="KeystoPngimgResult">
+        <include refid="selectKeystoPngimgVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKeystoPngimg" parameterType="KeystoPngimg" useGeneratedKeys="true" keyProperty="id">
+        insert into keysto_pngimg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="keywords != null">keywords,</if>
+            <if test="name != null">name,</if>
+            <if test="miaoshu != null">miaoshu,</if>
+            <if test="info != null">info,</if>
+            <if test="src != null">src,</if>
+            <if test="size != null">size,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="keywords != null">#{keywords},</if>
+            <if test="name != null">#{name},</if>
+            <if test="miaoshu != null">#{miaoshu},</if>
+            <if test="info != null">#{info},</if>
+            <if test="src != null">#{src},</if>
+            <if test="size != null">#{size},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKeystoPngimg" parameterType="KeystoPngimg">
+        update keysto_pngimg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="keywords != null">keywords = #{keywords},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="miaoshu != null">miaoshu = #{miaoshu},</if>
+            <if test="info != null">info = #{info},</if>
+            <if test="src != null">src = #{src},</if>
+            <if test="size != null">size = #{size},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKeystoPngimgById" parameterType="Long">
+        delete from keysto_pngimg where id = #{id}
+    </delete>
+
+    <delete id="deleteKeystoPngimgByIds" parameterType="String">
+        delete from keysto_pngimg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -89,7 +89,10 @@
                 },
                 {
                     field: 'title',
-                    title: '标题'
+                    title: '标题',
+                    formatter: function(value, row, index) {
+                        return $.table.tooltip(value);
+                    }
                 },
                 {
                     field: 'keywords',
@@ -97,15 +100,25 @@
                 },
                 {
                     field: 'name',
-                    title: '名称'
+                    title: '名称',
+                    formatter: function(value, row, index) {
+                        return $.table.tooltip(value);
+                    }
                 },
                 {
                     field: 'miaoshu',
-                    title: '描述'
+                    title: '描述',
+                    formatter: function(value, row, index) {
+                        return $.table.tooltip(value);
+                    }
                 },
                 {
                     field: 'info',
-                    title: '信息'
+                    title: '信息',
+                    formatter: function(value, row, index) {
+                        //<p th:text="${html}">
+                        return $.table.tooltip('<p th:text="${'+value+'}"');
+                    }
                 },
                 {
                     field: 'src',
@@ -117,7 +130,10 @@
                 },
                 {
                     field: 'type',
-                    title: '分类'
+                    title: '分类',
+                    formatter: function(value, row, index) {
+                return $.table.tooltip(value);
+            }
                 },
                 {
                     title: '操作',

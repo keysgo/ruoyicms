@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('亚马逊产品列表')" />
+    <th:block th:include="include :: header('png前端列表')" />
 </head>
-<body class="gray-bg ">
+<body class="gray-bg">
      <div class="container-div">
         <div class="row">
-            <div class="col-sm-12 search-collapse ">
+            <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
                         <ul>
@@ -15,24 +15,16 @@
                                 <input type="text" name="title"/>
                             </li>
                             <li>
-                                <label>价格：</label>
-                                <input type="text" name="price"/>
+                                <label>关键字：</label>
+                                <input type="text" name="keywords"/>
                             </li>
                             <li>
-                                <label>图片链接：</label>
-                                <input type="text" name="img"/>
+                                <label>名称：</label>
+                                <input type="text" name="name"/>
                             </li>
                             <li>
-                                <label>点赞：</label>
-                                <input type="text" name="star"/>
-                            </li>
-                            <li>
-                                <label>评论：</label>
-                                <input type="text" name="reviews"/>
-                            </li>
-                            <li>
-                                <label>评论图片：</label>
-                                <input type="text" name="reviewsImg"/>
+                                <label>分类：</label>
+                                <input type="text" name="type"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -44,16 +36,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="keystospider:product:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="home:pnghome:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="keystospider:product:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="home:pnghome:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="keystospider:product:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="home:pnghome:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="keystospider:product:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="home:pnghome:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -64,9 +56,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('keystospider:product:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('keystospider:product:remove')}]];
-        var prefix = ctx + "keystospider/product";
+        var editFlag = [[${@permission.hasPermi('home:pnghome:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('home:pnghome:remove')}]];
+        var prefix = ctx + "home/pnghome";
 
         $(function() {
             var options = {
@@ -75,7 +67,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "亚马逊产品",
+                modalName: "png前端",
                 columns: [{
                     checkbox: true
                 },
@@ -86,47 +78,35 @@
                 },
                 {
                     field: 'title',
-                    title: '标题',
-                    formatter: function(value, row, index) {
-                        return $.table.tooltip(value);
-                    }
+                    title: '标题'
                 },
                 {
-                    field: 'desc',
-                    title: '介绍',
-                    formatter: function(value, row, index) {
-                        return $.table.tooltip(value);
-                    }
+                    field: 'keywords',
+                    title: '关键字'
+                },
+                {
+                    field: 'name',
+                    title: '名称'
+                },
+                {
+                    field: 'miaoshu',
+                    title: '描述'
+                },
+                {
+                    field: 'info',
+                    title: '信息'
                 },
                 {
                     field: 'src',
-                    title: '亚马逊链接',
-                    formatter: function(value, row, index) {
-                        return $.table.tooltip(value);
-                    }
+                    title: '下载地址'
                 },
                 {
-                    field: 'price',
-                    title: '价格'
+                    field: 'size',
+                    title: '大小'
                 },
                 {
-                    field: 'img',
-                    title: '图片链接',
-                    formatter: function(value, row, index) {
-                return $.table.tooltip(value);
-            }
-                },
-                {
-                    field: 'star',
-                    title: '点赞'
-                },
-                {
-                    field: 'reviews',
-                    title: '评论'
-                },
-                {
-                    field: 'reviewsImg',
-                    title: '评论图片'
+                    field: 'type',
+                    title: '分类'
                 },
                 {
                     title: '操作',

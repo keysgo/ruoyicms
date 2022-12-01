@@ -8,10 +8,10 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * png前端对象 keysto_pngimg
  * 
- * @author ruoyi
+ * @author keysto
  * @date 2022-11-30
  */
-public class KeystoPngimg extends BaseEntity
+public class KeystoPngimgHome extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

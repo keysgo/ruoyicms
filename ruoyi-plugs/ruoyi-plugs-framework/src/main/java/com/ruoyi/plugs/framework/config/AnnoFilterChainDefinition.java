@@ -112,6 +112,7 @@ public class AnnoFilterChainDefinition {
         anonList.add("/docStore");
         anonList.add("/docStore/*.html");
         anonList.add("/keysgo/**");
+        anonList.add("/home/**");
 
     }
 }

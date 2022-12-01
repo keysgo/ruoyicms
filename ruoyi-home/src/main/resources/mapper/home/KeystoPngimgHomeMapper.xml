@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.home.mapper.KeystoPngimgMapper">
+<mapper namespace="com.ruoyi.home.mapper.KeystoPngimgHomeMapper">
     
-    <resultMap type="KeystoPngimg" id="KeystoPngimgResult">
+    <resultMap type="KeystoPngimgHome" id="KeystoPngimgHomeResult">
         <result property="id"    column="id"    />
         <result property="title"    column="title"    />
         <result property="keywords"    column="keywords"    />
@@ -16,12 +16,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="type"    column="type"    />
     </resultMap>
 
-    <sql id="selectKeystoPngimgVo">
+
+    <sql id="selectKeystoPngimgHomeVo">
         select id, title, keywords, name, miaoshu, info, src, size, type from keysto_pngimg
     </sql>
 
-    <select id="selectKeystoPngimgList" parameterType="KeystoPngimg" resultMap="KeystoPngimgResult">
-        <include refid="selectKeystoPngimgVo"/>
+    <!--    查询分类Result-->
+    <resultMap type="KeystoPngingType" id="KeystoPngimgTypeResult">
+        <result property="type"    column="type"  />
+        <result property="countType"    column="countType"  />
+    </resultMap>
+
+    <sql id="selectKeystoPngimgTypeVo">
+        select type,count(type) countType from keysto_pngimg
+    </sql>
+
+    <select id="selectKeystoPngimgHomeList" parameterType="KeystoPngimgHome" resultMap="KeystoPngimgHomeResult">
+        <include refid="selectKeystoPngimgHomeVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="keywords != null  and keywords != ''"> and keywords = #{keywords}</if>
@@ -30,12 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectKeystoPngimgById" parameterType="Long" resultMap="KeystoPngimgResult">
-        <include refid="selectKeystoPngimgVo"/>
+    <select id="selectKeystoPngimgHomeById" parameterType="Long" resultMap="KeystoPngimgHomeResult">
+        <include refid="selectKeystoPngimgHomeVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertKeystoPngimg" parameterType="KeystoPngimg" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertKeystoPngimgHome" parameterType="KeystoPngimgHome" useGeneratedKeys="true" keyProperty="id">
         insert into keysto_pngimg
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title != null and title != ''">title,</if>
@@ -59,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateKeystoPngimg" parameterType="KeystoPngimg">
+    <update id="updateKeystoPngimgHome" parameterType="KeystoPngimgHome">
         update keysto_pngimg
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null and title != ''">title = #{title},</if>
@@ -74,15 +85,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteKeystoPngimgById" parameterType="Long">
+    <delete id="deleteKeystoPngimgHomeById" parameterType="Long">
         delete from keysto_pngimg where id = #{id}
     </delete>
 
-    <delete id="deleteKeystoPngimgByIds" parameterType="String">
+    <delete id="deleteKeystoPngimgHomeByIds" parameterType="String">
         delete from keysto_pngimg where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectKeystoPngimgTypeList"  resultMap="KeystoPngimgTypeResult">
+        select type,count(type) countType from keysto_pngimg group  by type;
+    </select>
 
 </mapper>

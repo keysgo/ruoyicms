@@ -100,11 +100,12 @@ public class KeystoPngProcessor implements PageProcessor {
         //获取文件名字
         String pngName = split[2];
         //下载文件
-        savePng(imgUrl,pngPath,pngName);
+//        savePng(imgUrl,pngPath,pngName);
         keystoPngimg.setName(pngName);
         String title = page.getHtml().xpath("/html/body/div[4]/div/h1/text()").toString();
         keystoPngimg.setTitle(title);
-        String typeName = page.getHtml().xpath("/html/body/div[4]/div/div[3]/span/span[4]/a/span/text()").toString();
+
+        String typeName = page.getHtml().xpath("/html/body/div[4]/div/div[3]/span/span[3]/a/span/text()").toString();
         keystoPngimg.setType(typeName);
         List<Selectable> descList = page.getHtml().xpath("/html/body/div[4]/div//p").nodes();
         String pngInfo = page.getHtml().xpath("/html/body/div[4]/div/div[5]").toString();
@@ -165,9 +166,9 @@ public class KeystoPngProcessor implements PageProcessor {
         Spider.create(keystoPngProcessor)
                 .addUrl("https://pngimg.com/")
                 //开启5个线程抓取
-                .thread(5)
+                .thread(20)
                 .addPipeline(this.keystoPngPipeline)
                 //启动爬虫
-                .run();
+                .runAsync();
     }
 }

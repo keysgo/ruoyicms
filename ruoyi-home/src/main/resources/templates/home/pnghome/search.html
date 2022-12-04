@@ -73,7 +73,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" th:href="${homeConfig.homeUrl}">Free PNG DownLoad</a>
+                <a class="navbar-brand" href="#">Free PNG DownLoad</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -100,7 +100,7 @@
         <div class="row">
             <div class="col-sm-4 col-md-3" th:each="png,pngStat:${keystoPngimgHomes}">
 
-                <a th:href="@{/home/png/}+${png.id}" target="_blank" class="thumbnail" >
+                <a href="#" class="thumbnail" >
                     <img class="img1" src="" th:src="@{/png/}+${png.name}" th:alt="${png.title}" th:title="${png.title}" >
                 </a>
                 <div class="caption">
